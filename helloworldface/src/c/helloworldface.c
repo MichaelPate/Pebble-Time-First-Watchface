@@ -5,6 +5,7 @@ static Window *sMainWindow;
 // The time is still text, it needs its own text layer
 static TextLayer *sTimeTextLayer;
 
+
 // Window load and unload methods handle creation and destuction of Window's sub-elements
 static void mainWindow_load(Window *window)
 {
@@ -21,7 +22,7 @@ static void mainWindow_load(Window *window)
   // Set the colors, the text and font, and the alignment
   text_layer_set_background_color(sTimeTextLayer, GColorClear);
   text_layer_set_text_color(sTimeTextLayer, GColorBlack);
-  text_layer_set_text(sTimeTextLayer, "00:00");
+  //text_layer_set_text(sTimeTextLayer, "00:00"); //we are showing the time here, dont need this placeholder
   text_layer_set_font(sTimeTextLayer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
   text_layer_set_text_alignment(sTimeTextLayer, GTextAlignmentCenter);
 
@@ -35,6 +36,27 @@ static void mainWindow_unLoad(Window *window)
   text_layer_destroy(sTimeTextLayer);
 }
 
+static void updateTime()
+{
+  // Grab our tm stricture from localtime()
+  time_t temp = time(NULL); // reserve a spot for the time to live
+  struct tm *tickTime = localtime(&temp);
+
+  // Get the hours and minutes and write to a buffer
+  static char sBuffer[8];
+  strftime(sBuffer, sizeof(sBuffer), clock_is_24h_style() ? "%H:%M" : "%I:%M", tickTime);
+
+  // Now we can add to the time text layer
+  text_layer_set_text(sTimeTextLayer, sBuffer);
+}
+
+// Whenever the tickHandler is called, we are given a struct with the time and the units changed
+static void tickHandler(struct tm *tick_time, TimeUnits unitsChanged)
+{
+  // We can do other stuff here but for now just update the time
+  updateTime();
+}
+
 static void init()
 {
   // Create our main window, assign its handlers, and display it
@@ -44,6 +66,16 @@ static void init()
     .unload = mainWindow_unLoad
   });
   window_stack_push(sMainWindow, true); // true, for sliding animation
+
+  // The updateTime method will be called every minute but lets call it now
+  // so its showing the time as soon as the face loads instead of the next minute
+  updateTime();
+
+  // We need to subscribe to the tick timer to get the time
+  // We will call the tickHandler method above every minute
+  tick_timer_service_subscribe(MINUTE_UNIT, tickHandler);
+
+
 }
 
 static void deinit()
