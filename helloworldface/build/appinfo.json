@@ -27,8 +27,8 @@
             },
             {
                 "type": "font",
-                "name": "NEW_RETRO_48",
-                "file": "fonts/Newretrostyle3d-ygjm.ttf",
+                "name": "SUPERSLICED_ITALIC_48",
+                "file": "fonts/SuperSlicedItalic-aYoJK.ttf",
                 "comparability": "2.7"
             }
         ]

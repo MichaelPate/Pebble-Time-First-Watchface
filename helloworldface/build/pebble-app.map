@@ -23,7 +23,7 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 aplite/appinfo.auto.c.49.o
  .text          0x0000000000000000        0x0 aplite/src/resource_ids.auto.c.49.o
  .bss           0x0000000000000000        0x0 aplite/src/resource_ids.auto.c.49.o
- .data.RESOURCE_ID_NEW_RETRO_48
+ .data.RESOURCE_ID_SUPERSLICED_ITALIC_48
                 0x0000000000000000        0x4 aplite/src/resource_ids.auto.c.49.o
  .data.RESOURCE_ID_FONT_PERFECT_DOS_48
                 0x0000000000000000        0x4 aplite/src/resource_ids.auto.c.49.o
@@ -1429,14 +1429,14 @@ OUTPUT(/mnt/Babel/Documents/Projects/Pebble/first-watchface/helloworldface/build
  .debug_line    0x0000000000000428       0xcf aplite/src/resource_ids.auto.c.49.o
  .debug_line    0x00000000000004f7       0xc8 src/message_keys.auto.c.49.o
 
-.debug_str      0x0000000000000000      0x8fe
+.debug_str      0x0000000000000000      0x907
  .debug_str     0x0000000000000000      0x646 src/c/helloworldface.c.49.o
                                         0x6e1 (size before relaxing)
  .debug_str     0x0000000000000646      0x236 aplite/appinfo.auto.c.49.o
                                         0x338 (size before relaxing)
- .debug_str     0x000000000000087c       0x58 aplite/src/resource_ids.auto.c.49.o
-                                        0x13b (size before relaxing)
- .debug_str     0x00000000000008d4       0x2a src/message_keys.auto.c.49.o
+ .debug_str     0x000000000000087c       0x61 aplite/src/resource_ids.auto.c.49.o
+                                        0x144 (size before relaxing)
+ .debug_str     0x00000000000008dd       0x2a src/message_keys.auto.c.49.o
                                         0x10d (size before relaxing)
 
 .debug_frame    0x0000000000000000       0xbc
