@@ -4,7 +4,8 @@
 static Window *sMainWindow;
 // The time is still text, it needs its own text layer
 static TextLayer *sTimeTextLayer;
-
+// This will be the font we imported in part 2 of the watchface tutorial
+static GFont sTimeFont;
 
 // Window load and unload methods handle creation and destuction of Window's sub-elements
 static void mainWindow_load(Window *window)
@@ -23,7 +24,9 @@ static void mainWindow_load(Window *window)
   text_layer_set_background_color(sTimeTextLayer, GColorClear);
   text_layer_set_text_color(sTimeTextLayer, GColorBlack);
   //text_layer_set_text(sTimeTextLayer, "00:00"); //we are showing the time here, dont need this placeholder
-  text_layer_set_font(sTimeTextLayer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
+  //text_layer_set_font(sTimeTextLayer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD)); // we are now using our imported font
+  sTimeFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_PERFECT_DOS_48));
+  text_layer_set_font(sTimeTextLayer, sTimeFont);
   text_layer_set_text_alignment(sTimeTextLayer, GTextAlignmentCenter);
 
   // Finally, with our text layer setup, we can add it to the window
@@ -34,6 +37,9 @@ static void mainWindow_unLoad(Window *window)
 {
   // Must destroy the layer when we are done
   text_layer_destroy(sTimeTextLayer);
+
+  // Also unload the font
+  fonts_unload_custom_font(sTimeFont);
 }
 
 static void updateTime()
@@ -74,8 +80,6 @@ static void init()
   // We need to subscribe to the tick timer to get the time
   // We will call the tickHandler method above every minute
   tick_timer_service_subscribe(MINUTE_UNIT, tickHandler);
-
-
 }
 
 static void deinit()
