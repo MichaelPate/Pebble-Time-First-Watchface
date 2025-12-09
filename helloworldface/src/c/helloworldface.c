@@ -3,26 +3,28 @@
 // This main window is static, where all our UI elements will live
 static Window *sMainWindow;
 // The time is still text, it needs its own text layer
-static TextLayer *sTimeTextLayer;
+static TextLayer *sHourTextLayer;
+static TextLayer *sMinuteTextLayer;
+
 // This will be the font we imported in part 2 of the watchface tutorial
 static GFont sTimeFont;
 
 static Layer *bgColorsLayer;
-static int divider_x = 55;  // where is the vertical line down the face
+static int divider_x = 65;  // where is the vertical line down the face
 
 static void updateBgColors_proc(Layer *layer, GContext *ctx)
 {
   GRect bounds = layer_get_bounds(layer);
-  int leftTileWidth = 55;
+  //int leftTileWidth = 55;
   //GRect leftTile = GRect(0, PBL_IF_ROUND_ELSE(58,52), leftTileWidth, 50);
   //GRect rightTile = GRect(0, PBL_IF_ROUND_ELSE(58,52), bounds.size.w - leftTileWidth, 50);
   GRect leftTile = GRect(0, 0, divider_x, bounds.size.h);
   GRect rightTile = GRect(divider_x, 0, bounds.size.w - divider_x, bounds.size.h);
   
-  graphics_context_set_fill_color(ctx, GColorRed);
+  graphics_context_set_fill_color(ctx, GColorDarkGray);
   graphics_fill_rect(ctx, leftTile, 0, GCornerNone);
 
-  graphics_context_set_fill_color(ctx, GColorBlue);
+  graphics_context_set_fill_color(ctx, GColorDarkGreen);
   graphics_fill_rect(ctx, rightTile, 0, GCornerNone);
 
 }
@@ -42,26 +44,33 @@ static void mainWindow_load(Window *window)
   // Now we can apply those bounds to the text layers
   // The square displays are 52 px tall, round is 58, so we use the built in macro.
   // Since we only care about the Time 1 (basalt) for this face, technically we dont need to do this
-  sTimeTextLayer = text_layer_create(GRect(0, PBL_IF_ROUND_ELSE(58,52), bounds.size.w, 50));
-
+  //sTimeTextLayer = text_layer_create(GRect(0, PBL_IF_ROUND_ELSE(58,52), bounds.size.w, 50));
+  sHourTextLayer = text_layer_create(GRect(divider_x, 0, bounds.size.w-divider_x, bounds.size.h / 2));
+  sMinuteTextLayer = text_layer_create(GRect(divider_x, bounds.size.h / 2, bounds.size.w-divider_x, bounds.size.h));
   // Improve the layout to be more like a watchface
   // Set the colors, the text and font, and the alignment
-  text_layer_set_background_color(sTimeTextLayer, GColorClear);
-  text_layer_set_text_color(sTimeTextLayer, GColorBlack);
+  text_layer_set_background_color(sHourTextLayer, GColorClear);
+  text_layer_set_background_color(sMinuteTextLayer, GColorClear);
+  text_layer_set_text_color(sHourTextLayer, GColorBlack);
+  text_layer_set_text_color(sHourTextLayer, GColorBlack);
   //text_layer_set_text(sTimeTextLayer, "00:00"); //we are showing the time here, dont need this placeholder
   //text_layer_set_font(sTimeTextLayer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD)); // we are now using our imported font
   sTimeFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_PERFECT_DOS_48));
-  text_layer_set_font(sTimeTextLayer, sTimeFont);
-  text_layer_set_text_alignment(sTimeTextLayer, GTextAlignmentCenter);
+  text_layer_set_font(sHourTextLayer, sTimeFont);
+  text_layer_set_font(sMinuteTextLayer, sTimeFont);
+  text_layer_set_text_alignment(sHourTextLayer, GTextAlignmentCenter);
+  text_layer_set_text_alignment(sMinuteTextLayer, GTextAlignmentCenter);
 
   // Finally, with our text layer setup, we can add it to the window
-  layer_add_child(windowLayer, text_layer_get_layer(sTimeTextLayer));
+  layer_add_child(windowLayer, text_layer_get_layer(sHourTextLayer));
+  layer_add_child(windowLayer, text_layer_get_layer(sMinuteTextLayer));
 }
 
 static void mainWindow_unLoad(Window *window)
 {
   // Must destroy the layer when we are done
-  text_layer_destroy(sTimeTextLayer);
+  text_layer_destroy(sHourTextLayer);
+  text_layer_destroy(sMinuteTextLayer);
 
   // Also unload the font
   fonts_unload_custom_font(sTimeFont);
@@ -74,11 +83,18 @@ static void updateTime()
   struct tm *tickTime = localtime(&temp);
 
   // Get the hours and minutes and write to a buffer
-  static char sBuffer[8];
-  strftime(sBuffer, sizeof(sBuffer), clock_is_24h_style() ? "%H:%M" : "%I:%M", tickTime);
+  //static char sBuffer[8];
+  //strftime(sBuffer, sizeof(sBuffer), clock_is_24h_style() ? "%H:%M" : "%I:%M", tickTime);
 
+  static char sHourBuffer[4];
+  strftime(sHourBuffer, sizeof(sHourBuffer), clock_is_24h_style() ? "%H" : "%I", tickTime);
   // Now we can add to the time text layer
-  text_layer_set_text(sTimeTextLayer, sBuffer);
+  text_layer_set_text(sHourTextLayer, sHourBuffer);
+
+  static char sMinBuffer[4];
+  strftime(sMinBuffer, sizeof(sMinBuffer), "%M", tickTime);
+  // Now we can add to the time text layer
+  text_layer_set_text(sMinuteTextLayer, sMinBuffer);
 }
 
 // Whenever the tickHandler is called, we are given a struct with the time and the units changed
