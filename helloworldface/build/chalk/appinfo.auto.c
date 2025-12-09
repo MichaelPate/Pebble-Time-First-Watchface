@@ -13,7 +13,7 @@ const PebbleProcessInfo __pbl_app_info __attribute__ ((section (".pbl_header")))
   .company = "MakeAwesomeHappen",
   .icon_resource_id = DEFAULT_MENU_ICON,
   .sym_table_addr = 0xA7A7A7A7,
-  .flags = PROCESS_INFO_PLATFORM_CHALK,
+  .flags = PROCESS_INFO_WATCH_FACE | PROCESS_INFO_PLATFORM_CHALK,
   .num_reloc_entries = 0xdeadcafe,
   .uuid = { 0x18, 0x26, 0xE7, 0xC8, 0x04, 0x66, 0x49, 0x2D, 0x82, 0xEC, 0x13, 0x5E, 0xC4, 0xF2, 0x7D, 0x81 },
   .virtual_size = 0xb6b6

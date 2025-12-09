@@ -46,7 +46,7 @@ PEBBLE_SDK_ROOT = '/home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble'
 PLATFORM = {'NAME': 'chalk', 'MAX_APP_BINARY_SIZE': 65536, 'MAX_APP_MEMORY_SIZE': 65536, 'MAX_WORKER_MEMORY_SIZE': 10240, 'MAX_RESOURCES_SIZE_APPSTORE': 262144, 'MAX_RESOURCES_SIZE': 1048576, 'DEFINES': ['PBL_PLATFORM_CHALK', 'PBL_COLOR', 'PBL_ROUND', 'PBL_MICROPHONE', 'PBL_SMARTSTRAP', 'PBL_HEALTH', 'PBL_COMPASS', 'PBL_SMARTSTRAP_POWER', 'PBL_DISPLAY_WIDTH=180', 'PBL_DISPLAY_HEIGHT=180'], 'BUILD_DIR': 'chalk', 'BUNDLE_BIN_DIR': 'chalk', 'ADDITIONAL_TEXT_LINES_FOR_PEBBLE_H': [], 'MAX_FONT_GLYPH_SIZE': 256, 'TAGS': ['chalk', 'color', 'round', 'mic', 'strap', 'strappower', 'compass', 'health', '180w', '180h']}
 PLATFORM_NAME = 'chalk'
 PREFIX = '/usr/local'
-PROJECT_INFO = {'displayName': 'helloworldface', 'uuid': '1826e7c8-0466-492d-82ec-135ec4f27d81', 'sdkVersion': '3', 'enableMultiJS': True, 'targetPlatforms': ['aplite', 'basalt', 'chalk', 'diorite', 'emery', 'flint'], 'watchapp': {'watchface': False}, 'messageKeys': {'dummy': 10000}, 'resources': {'media': []}, 'name': 'helloworldface', 'shortName': 'helloworldface', 'longName': 'helloworldface', 'versionLabel': '1.0', 'companyName': 'MakeAwesomeHappen', 'appKeys': {'dummy': 10000}}
+PROJECT_INFO = {'displayName': 'helloworldface', 'uuid': '1826e7c8-0466-492d-82ec-135ec4f27d81', 'sdkVersion': '3', 'enableMultiJS': True, 'targetPlatforms': ['aplite', 'basalt', 'chalk', 'diorite', 'emery', 'flint'], 'watchapp': {'watchface': True}, 'messageKeys': {'dummy': 10000}, 'resources': {'media': []}, 'name': 'helloworldface', 'shortName': 'helloworldface', 'longName': 'helloworldface', 'versionLabel': '1.0', 'companyName': 'MakeAwesomeHappen', 'appKeys': {'dummy': 10000}}
 REQUESTED_PLATFORMS = ['aplite', 'basalt', 'chalk', 'diorite', 'emery', 'flint']
 RESOURCES_JSON = []
 RPATH_ST = '-Wl,-rpath,%s'
@@ -61,7 +61,7 @@ STLIB_MARKER = None
 STLIB_ST = '-l%s'
 SUPPORTED_PLATFORMS = ['chalk', 'flint', 'diorite', 'emery', 'aplite', 'basalt']
 TARGET_PLATFORMS = ['flint', 'emery', 'diorite', 'chalk', 'basalt', 'aplite']
-TIMESTAMP = 1765249894
+TIMESTAMP = 1765250838
 USE_GROUPS = True
 VERBOSE = 0
 WEBPACK = ['/home/michaelp/.pebble-sdk/SDKs/current/node_modules/.bin/webpack']
