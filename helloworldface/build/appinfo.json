@@ -1,0 +1,32 @@
+{
+    "displayName": "helloworldface",
+    "uuid": "1826e7c8-0466-492d-82ec-135ec4f27d81",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "targetPlatforms": [
+        "aplite",
+        "basalt",
+        "chalk",
+        "diorite",
+        "emery",
+        "flint"
+    ],
+    "watchapp": {
+        "watchface": false
+    },
+    "messageKeys": {
+        "dummy": 10000
+    },
+    "resources": {
+        "media": []
+    },
+    "name": "helloworldface",
+    "shortName": "helloworldface",
+    "longName": "helloworldface",
+    "versionLabel": "1.0",
+    "companyName": "MakeAwesomeHappen",
+    "appKeys": {
+        "dummy": 10000
+    },
+    "capabilities": []
+}
