@@ -55,7 +55,10 @@ static void mainWindow_load(Window *window)
   text_layer_set_text_color(sHourTextLayer, GColorBlack);
   //text_layer_set_text(sTimeTextLayer, "00:00"); //we are showing the time here, dont need this placeholder
   //text_layer_set_font(sTimeTextLayer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD)); // we are now using our imported font
-  sTimeFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_PERFECT_DOS_48));
+  //sTimeFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_PERFECT_DOS_48));
+  sTimeFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_NEW_RETRO_48));
+  //text_layer_set_font(sHourTextLayer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
+  //text_layer_set_font(sMinuteTextLayer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
   text_layer_set_font(sHourTextLayer, sTimeFont);
   text_layer_set_font(sMinuteTextLayer, sTimeFont);
   text_layer_set_text_alignment(sHourTextLayer, GTextAlignmentCenter);
@@ -92,7 +95,7 @@ static void updateTime()
   text_layer_set_text(sHourTextLayer, sHourBuffer);
 
   static char sMinBuffer[4];
-  strftime(sMinBuffer, sizeof(sMinBuffer), "%M", tickTime);
+  strftime(sMinBuffer, sizeof(sMinBuffer),"%M", tickTime);
   // Now we can add to the time text layer
   text_layer_set_text(sMinuteTextLayer, sMinBuffer);
 }

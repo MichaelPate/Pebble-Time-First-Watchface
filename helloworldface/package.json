@@ -31,6 +31,12 @@
           "name": "FONT_PERFECT_DOS_48",
           "file": "fonts/perfect-dos-vga.ttf",
           "comparability": "2.7"
+        },
+        {
+          "type": "font",
+          "name": "NEW_RETRO_48",
+          "file": "fonts/Newretrostyle3d-ygjm.ttf",
+          "comparability": "2.7"
         }
       ]
     }
