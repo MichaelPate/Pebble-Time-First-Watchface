@@ -7,12 +7,37 @@ static TextLayer *sTimeTextLayer;
 // This will be the font we imported in part 2 of the watchface tutorial
 static GFont sTimeFont;
 
+static Layer *bgColorsLayer;
+static int divider_x = 55;  // where is the vertical line down the face
+
+static void updateBgColors_proc(Layer *layer, GContext *ctx)
+{
+  GRect bounds = layer_get_bounds(layer);
+  int leftTileWidth = 55;
+  //GRect leftTile = GRect(0, PBL_IF_ROUND_ELSE(58,52), leftTileWidth, 50);
+  //GRect rightTile = GRect(0, PBL_IF_ROUND_ELSE(58,52), bounds.size.w - leftTileWidth, 50);
+  GRect leftTile = GRect(0, 0, divider_x, bounds.size.h);
+  GRect rightTile = GRect(divider_x, 0, bounds.size.w - divider_x, bounds.size.h);
+  
+  graphics_context_set_fill_color(ctx, GColorRed);
+  graphics_fill_rect(ctx, leftTile, 0, GCornerNone);
+
+  graphics_context_set_fill_color(ctx, GColorBlue);
+  graphics_fill_rect(ctx, rightTile, 0, GCornerNone);
+
+}
+
 // Window load and unload methods handle creation and destuction of Window's sub-elements
 static void mainWindow_load(Window *window)
 {
   // First we need information on the display we are loading on
   Layer *windowLayer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(windowLayer);
+
+  // We want to add some colored boxes to the background
+  bgColorsLayer = layer_create(GRect(0, 0, bounds.size.w, bounds.size.h));
+  layer_set_update_proc(bgColorsLayer, updateBgColors_proc);
+  layer_add_child(windowLayer, bgColorsLayer);
 
   // Now we can apply those bounds to the text layers
   // The square displays are 52 px tall, round is 58, so we use the built in macro.
@@ -86,6 +111,8 @@ static void deinit()
 {
   // Dont forget to destroy the window object when we are done
   window_destroy(sMainWindow);
+
+  layer_destroy(bgColorsLayer);
 }
 
 int main(void)
