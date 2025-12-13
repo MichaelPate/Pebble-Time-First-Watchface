@@ -89,8 +89,8 @@ static void updateTime()
   //static char sBuffer[8];
   //strftime(sBuffer, sizeof(sBuffer), clock_is_24h_style() ? "%H:%M" : "%I:%M", tickTime);
 
-  static char sHourBuffer[4];
-  strftime(sHourBuffer, sizeof(sHourBuffer), clock_is_24h_style() ? "%H" : "%I", tickTime);
+  static char sHourBuffer[8];
+  strftime(sHourBuffer, sizeof(sHourBuffer), clock_is_24h_style() ? "%H:%M" : "%I:%M", tickTime);
   // Now we can add to the time text layer
   text_layer_set_text(sHourTextLayer, sHourBuffer);
 

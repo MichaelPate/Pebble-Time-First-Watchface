@@ -34,8 +34,14 @@
         },
         {
           "type": "font",
-          "name": "SUPERSLICED_ITALIC_48",
-          "file": "fonts/SuperSlicedItalic-aYoJK.ttf",
+          "name": "ABDUCTION_2002_48",
+          "file": "fonts/abduction2002.ttf",
+          "comparability": "2.7"
+        },
+        {
+          "type": "font",
+          "name": "DOTMATRIX_24",
+          "file": "fonts/DOTMATRI.ttf",
           "comparability": "2.7"
         }
       ]
